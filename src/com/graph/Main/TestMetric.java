@@ -25,10 +25,10 @@ public class TestMetric {
 	                                  // 6: gplus_combined_transform.txt
 
 	static int metric = 1;     // 1: local clustering coefficient 
-					           // 2: modularity 
+			           // 2: modularity 
 	
 	int init = 1;              // 0: the first run
-						       // 1: has got the original real coefficient
+			    	   // 1: has the original real coefficient
 	
 	public static double epsilon = 1.0;
 	public static double percentageForMatrix = 0.9;
