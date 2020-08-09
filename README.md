@@ -6,13 +6,13 @@ Local differential privacy (LDP) is an emerging technique for privacy-preserving
 
 # Description (How to run)
 Two functions to run:
-  src/com/graph/Main/TestMetric.java: calculate the real/estimated clustering coefficient of each node in the graph
-  src/com/graph/Main/DedicatedSolution.java: calculate estimated clustering coefficient/modularity via dedicated LDP solutions
+1. src/com/graph/Main/TestMetric.java: calculate the real/estimated clustering coefficient of each node in the graph
+2. src/com/graph/Main/DedicatedSolution.java: calculate estimated clustering coefficient/modularity via dedicated LDP solutions
   
-Both of TestMetric and DedicatedSolution need a parameter to specify which dataset is used:
-  1: facebook_combined   
-	2: Email-Enron
-	3: CA-AstroPh-transform
-	4: Brightkite_edges
-	5: twitter_combined_transform
-	6: gplus_combined_transform
+Both of the two functions TestMetric and DedicatedSolution need a parameter to specify which dataset is used:
+1: facebook_combined   
+2: Email-Enron
+3: CA-AstroPh-transform
+4: Brightkite_edges
+5: twitter_combined_transform
+6: gplus_combined_transform
