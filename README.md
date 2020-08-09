@@ -9,7 +9,7 @@ Two functions to run:
 1. src/com/graph/Main/TestMetric.java: calculate the real/estimated clustering coefficient of each node in the graph
 2. src/com/graph/Main/DedicatedSolution.java: calculate estimated clustering coefficient/modularity via dedicated LDP solutions
   
-Both of the two functions TestMetric and DedicatedSolution take as input an integer parameter (1-6) to specify which dataset is used:
+Both of the two functions TestMetric and DedicatedSolution take as input an integer parameter (1-6) to specify which dataset will be used:
 1. facebook_combined   
 2. Email-Enron
 3. CA-AstroPh-transform
