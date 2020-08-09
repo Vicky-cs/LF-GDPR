@@ -17,7 +17,7 @@ public class TestMetric {
 	public int userNum;
 	public boolean[][] mat;
 	
-	public static int dataset = 1;    // 1: facebook_combined.txt    
+	public int dataset;               // 1: facebook_combined.txt    
 					                  // 2: Email-Enron.txt
 	                                  // 3: CA-AstroPh-transform.txt
 	                                  // 4: Brightkite_edges.txt (not used)
@@ -25,10 +25,10 @@ public class TestMetric {
 	                                  // 6: gplus_combined_transform.txt
 
 	static int metric = 1;     // 1: local clustering coefficient 
-			           // 2: modularity 
+					           // 2: modularity 
 	
 	int init = 1;              // 0: the first run
-			    	   // 1: has the original real coefficient
+						       // 1: has got the original real coefficient
 	
 	public static double epsilon = 1.0;
 	public static double percentageForMatrix = 0.9;
@@ -39,16 +39,12 @@ public class TestMetric {
 
 	
 	public TestMetric(int dataset, double per, double[] epsilon_all) throws Exception{
-		TestMetric.dataset = dataset;
+		this.dataset = dataset;
 		TestMetric.percentageForMatrix = Tools.optimalPercentage[dataset-1][metric-1][(int)epsilon-1];
-		String filename = Tools.inputFilename[TestMetric.dataset-1]+".txt";
-		this.userNum = Tools.inputFileUserNum[TestMetric.dataset-1];
+		String filename = Tools.inputFilename[dataset-1]+".txt";
+		this.userNum = Tools.inputFileUserNum[dataset-1];
 		mat = new boolean[userNum][userNum];
 		Data.readGraph(filename, mat); 
-			
-		
-//		double ori_coefficient = getRealCoefficient(mat);
-//		System.out.println(ori_coefficient);
 		
 	
 		/*************************************   Clustering coefficient estimation   ***************************************/
@@ -203,9 +199,9 @@ public class TestMetric {
 		String filename = "";
 		if(percentage==0.3 || percentage==0.5 || percentage==0.7 || percentage==0.9){
 			int flag = (int) ((percentage)*100+(1-percentage)*10);   // for fixed alpha: 0.3->37  0.5->55   0.7->73   0.9->91
-			filename = "ClusteringCoefficientEstimation/Fix_alpha/ClusteringCoefficient_"+flag+"_"+dataset+"_"+epsilon+".txt";
+			filename = flag+"_"+dataset+"_"+epsilon+".txt";
 		} else {
-			filename = "ClusteringCoefficientEstimation/LF_GDPR/ClusteringCoefficient_"+dataset+"_"+epsilon+".txt";
+			filename = dataset+"_"+epsilon+".txt";
 		}
 		PrintStream ps = new PrintStream(new File(filename));
 		for(int i=0; i<mat[0].length; i++)
@@ -227,7 +223,7 @@ public class TestMetric {
 			if(type==8)       // triangular data
 				perturbedMat = NeighborListRandomization.randomize_half(mat, epsilon);
 			double[] perturbed_coefficient = ClusteringCoefficient.getLocalClusteringCoefficientList(perturbedMat);
-			String filename = "ClusteringCoefficientEstimation/Baseline2_no_degree/Baseline2_ClusteringCoefficient_"+this.dataset+"_"+epsilon+".txt";
+			String filename = dataset+"_"+epsilon+".txt";
 			Tools.writeVectorToFile(filename, perturbed_coefficient);
 		}
     }
@@ -242,7 +238,7 @@ public class TestMetric {
 			System.out.println("********   dataset="+dataset+"\t epsilon="+epsilon+"  ********  ");
 //			double[] perturbed_coefficient = testLCCEstimation_baseline(mat, epsilon_all[j], type, true);	 // noisy degree is calculated and calibrated from perturbed matrix
 			double[] perturbed_coefficient = baseline_oneNode(mat, epsilon_all[j], type, calibrated);  // noisy degree is directly calculated from perturbed matrix
-			String filename = "ClusteringCoefficientEstimation/Baseline_no_calibration_degree/ClusteringCoefficient_"+this.dataset+"_"+epsilon+".txt";
+			String filename = dataset+"_"+epsilon+".txt";
 			Tools.writeVectorToFile(filename, perturbed_coefficient);
 		}
     }
@@ -265,39 +261,15 @@ public class TestMetric {
 		}
 		return perturbed_coefficient;
     }
-    
-    
-	// test the graph after neighbor list randomization
-	public void testNeighborListRandomization(double ori_coefficient, boolean[][] mat){		
-		double[] epsilon_all = {8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0, 0.5, 0.0};
-		for(int i=0; i<epsilon_all.length; i++){
-			TestMetric.epsilon = epsilon_all[i];
-			System.out.println("epsilon="+TestMetric.epsilon);
-			NeighborListRandomization.randomize_half(mat, epsilon);
-			double new_coefficient = 0.0;
-			if(metric == 1){       //1:local Clustering Coefficient 
-				new_coefficient = ClusteringCoefficient.getLocalClusteringCoefficient(mat);
-			}else if(metric == 2){  //2:modularity
-				new_coefficient = 0.0; 
-				System.out.println("Need to implement the calculation of modularity!!!");
-			}
-			double relErr = Math.abs(ori_coefficient-new_coefficient)/Math.abs(ori_coefficient);
-			System.out.println(ori_coefficient+"  "+new_coefficient+"    relative error="+relErr);
-		}
-	}
 	
 	
-	public static void main(String[] args){
-		try {			
-			int dataset = 2;
-			double fixPercentage = 0.3;
-			double[] epsilon_all = {8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0};
+	public static void main(String[] args) throws Exception{		
+		int dataset = Integer.parseInt(args[0]);
+//		int dataset = 1;
+		double fixPercentage = 0.3;
+		double[] epsilon_all = {8.0, 7.0, 6.0, 5.0, 4.0, 3.0, 2.0, 1.0};
 
-			new TestMetric(dataset, fixPercentage, epsilon_all);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		new TestMetric(dataset, fixPercentage, epsilon_all);
 	}
 	
 }

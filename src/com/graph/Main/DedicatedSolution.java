@@ -12,15 +12,15 @@ import com.graph.metric.Tools;
 public class DedicatedSolution {
 
 	
-	public DedicatedSolution() throws Exception{
-		// dataset:
-		// 1: facebook_combined.txt    
-        // 2: Email-Enron.txt
-        // 3: CA-AstroPh-transform.txt
-        // 4: Brightkite_edges.txt (not used)
-        // 5: twitter_combined_transform.txt (not used)
-        // 6: gplus_combined_transform.txt
-		int dataset = 1;
+	int dataset;    // 1: facebook_combined.txt    
+				    // 2: Email-Enron.txt
+				    // 3: CA-AstroPh-transform.txt
+				    // 4: Brightkite_edges.txt (not used in paper)
+				    // 5: twitter_combined_transform.txt (not used in paper)
+				    // 6: gplus_combined_transform.txt
+	
+	public DedicatedSolution(int data) throws Exception{
+		this.dataset = data;
 		double[] epsilon_all = {1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0};
 		
 		for(int j=0; j<epsilon_all.length; j++){
@@ -108,7 +108,8 @@ public class DedicatedSolution {
 	
 	
 	public static void main(String[] args) throws Exception{
-		new DedicatedSolution();
+		int dataset = Integer.parseInt(args[0]);
+		new DedicatedSolution(dataset);
 	}
 }
 
