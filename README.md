@@ -16,3 +16,6 @@ Both of the two functions TestMetric and DedicatedSolution take as input an inte
 4. Brightkite_edges
 5. twitter_combined_transform
 6. gplus_combined_transform
+
+# Contact information
+Please feel free to discuss with us at qingqiingcs.ye@gmail.com.
