@@ -10,9 +10,9 @@ Two functions to run:
 2. src/com/graph/Main/DedicatedSolution.java: calculate estimated clustering coefficient/modularity via dedicated LDP solutions
   
 Both of the two functions TestMetric and DedicatedSolution need a parameter to specify which dataset is used:
-1. 1: facebook_combined   
-2. 2: Email-Enron
-3. 3: CA-AstroPh-transform
-4. 4: Brightkite_edges
-5. 5: twitter_combined_transform
-6. 6: gplus_combined_transform
+1. facebook_combined   
+2. Email-Enron
+3. CA-AstroPh-transform
+4. Brightkite_edges
+5. twitter_combined_transform
+6. gplus_combined_transform
