@@ -18,4 +18,4 @@ Both of the two functions TestMetric and DedicatedSolution take as input an inte
 6. gplus_combined_transform
 
 # Contact information
-Please feel free to send email to qingqiingcs.ye@gmail.com, if you have any problem.
+Please feel free to send email to qingqingcs.ye@gmail.com, if you have any problem.
